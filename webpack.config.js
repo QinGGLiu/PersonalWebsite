@@ -10,7 +10,10 @@ module.exports = {
     },
     module: {
         rules: [
-            { test: /\.css$/, use: 'css-loader' },
+            {
+                test: /\.css$/,
+                use: ['style-loader', 'css-loader']
+            },
             {
                 test: /\.js$/,
                 exclude: /(node_modules|bower_components)/,
@@ -18,9 +21,15 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         cacheDirectory: true,
-                        presets: ['babel-preset-env'],
+                        presets: ['env'],
                         plugins: ['transform-runtime']
                     }
+                }
+            }, {
+                test: /\.(png|jpg|gif)$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {}
                 }
             }
         ]
